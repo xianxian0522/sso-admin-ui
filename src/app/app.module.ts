@@ -10,12 +10,16 @@ import zh from '@angular/common/locales/zh';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './pages/login/login.component';
+import { ClientListComponent } from './pages/client-list/client-list.component';
 
 registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    ClientListComponent
   ],
   imports: [
     BrowserModule,

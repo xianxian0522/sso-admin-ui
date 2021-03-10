@@ -1,0 +1,7 @@
+{
+  "/sso-admin/api/v1": {
+    "target": "http://172.16.69.122:8081",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
