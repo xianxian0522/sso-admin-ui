@@ -23,6 +23,8 @@ import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import { MiddleComponent } from './pages/middle/middle.component';
+import { UserEditComponent } from './pages/user-edit/user-edit.component';
+import { ClientEditComponent } from './pages/client-edit/client-edit.component';
 
 registerLocaleData(zh);
 
@@ -32,7 +34,9 @@ registerLocaleData(zh);
     LoginComponent,
     ClientListComponent,
     NotFoundComponent,
-    MiddleComponent
+    MiddleComponent,
+    UserEditComponent,
+    ClientEditComponent
   ],
   imports: [
     BrowserModule,
