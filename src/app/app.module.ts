@@ -25,6 +25,7 @@ import {NzTableModule} from 'ng-zorro-antd/table';
 import { MiddleComponent } from './pages/middle/middle.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { ClientEditComponent } from './pages/client-edit/client-edit.component';
+import {NzModalModule} from 'ng-zorro-antd/modal';
 
 registerLocaleData(zh);
 
@@ -53,6 +54,7 @@ registerLocaleData(zh);
     NzDropDownModule,
     NzIconModule,
     NzTableModule,
+    NzModalModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

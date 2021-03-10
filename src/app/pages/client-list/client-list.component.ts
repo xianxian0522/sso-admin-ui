@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {BaseRepository} from '../../share/services/base.repository';
-import {ActivatedRoute} from '@angular/router';
 import {NzTableComponent} from 'ng-zorro-antd/table';
 import {merge} from 'rxjs';
 import {debounceTime, map, switchMap} from 'rxjs/operators';
 import {ClientList} from '../../share/mode/client';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalService} from 'ng-zorro-antd/modal';
+import {UserEditComponent} from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-client-list',
@@ -16,11 +16,11 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private baseRepository: BaseRepository<any>,
-    private activatedRoute: ActivatedRoute,
-    private messageService: NzMessageService,
+    private modalService: NzModalService,
   ) { }
 
   username = '';
+  userInfo: any;
   listOfData: ClientList[] = [];
   total = 1;
   pageSize = 10;
@@ -59,13 +59,20 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   getUserInfo(): void {
     this.baseRepository.userInfo().subscribe(user => {
       this.username = user.data.username as string;
+      this.userInfo = user.data;
     });
   }
   updatePassword(): void {
 
   }
   updateUserInfo(): void {
-
+    this.modalService.create({
+      nzContent: UserEditComponent,
+      nzFooter: null,
+      nzComponentParams: {mode: 'info', data: this.userInfo}
+    }).afterClose.subscribe(_ => {
+      console.log(_, '__');
+    });
   }
   logout(): void {
     localStorage.removeItem('token');
