@@ -1,1 +1,51 @@
-<p>client-list works!</p>
+<div>
+  <div>
+    <div class="client-header">
+      <nz-avatar nzSize="default" nzIcon="user"></nz-avatar>
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        用户名
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="updatePassword()">修改密码</li>
+          <li nz-menu-item (click)="updateUserInfo()">修改信息</li>
+          <li nz-menu-item (click)="logout()">退出</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+  </div>
+  <div class="client-content">
+    <nz-table #basicTable [nzData]="listOfData"
+              [nzLoading]="isLoading"
+              [nzTotal]="total"
+              [nzPageSize]="pageSize"
+              [nzPageIndex]="pageIndex"
+              [nzFrontPagination]="false"
+              nzShowSizeChanger
+              nzShowPagination>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data }}</td>
+        <td>{{ data }}</td>
+        <td>{{ data }}</td>
+        <td>
+          <div style="display: flex">
+            <button nz-button>更新</button>
+            <button nz-button>更新密钥</button>
+            <button nz-button>删除</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

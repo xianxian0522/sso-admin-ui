@@ -35,8 +35,8 @@ export class BaseRepository<MODEL extends {id?: number}> {
   login(): Observable<Login> {
     return this.httpClient.get<Login>(`${ssoApi}/login`);
   }
-  token(): Observable<any>{
-    return this.httpClient.get(`${ssoApi}/getToken`);
+  token(state: string, code: string): Observable<Login>{
+    return this.httpClient.get(`${ssoApi}/getToken?state=${state}&code=${code}`);
   }
 
   uereInfo(): Observable<any>{
