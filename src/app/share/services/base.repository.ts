@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Login} from '../mode/login';
+import {User} from '../mode/user';
 
 const clientApi = '/sso-admin/api/v1/client';
 const ssoApi = '/sso-admin/api/v1/sso';
@@ -39,8 +40,8 @@ export class BaseRepository<MODEL extends {id?: number}> {
     return this.httpClient.get(`${ssoApi}/getToken?state=${state}&code=${code}`);
   }
 
-  uereInfo(): Observable<any>{
-    return this.httpClient.get(`${userApi}/userinfo`);
+  userInfo(): Observable<User>{
+    return this.httpClient.get<User>(`${userApi}/userinfo`);
   }
   updateUserInfo(model: MODEL): Observable<any>{
     return this.httpClient.post(`${userApi}/updateUserInfo`, model);

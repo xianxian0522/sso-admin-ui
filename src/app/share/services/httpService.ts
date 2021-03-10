@@ -11,7 +11,7 @@ export class HttpService {
   getAuthorizationToken(): string {
     const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
     if (token) {
-      const authorizationToken = `Bearer ${token}`;
+      const authorizationToken = `${token}`;
       return authorizationToken;
     } else {
       this.router.navigateByUrl('/login');

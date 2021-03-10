@@ -3,7 +3,7 @@
     <div class="client-header">
       <nz-avatar nzSize="default" nzIcon="user"></nz-avatar>
       <a nz-dropdown [nzDropdownMenu]="menu">
-        用户名
+        {{username}}
         <i nz-icon nzType="down"></i>
       </a>
       <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -22,23 +22,48 @@
               [nzPageSize]="pageSize"
               [nzPageIndex]="pageIndex"
               [nzFrontPagination]="false"
+              [nzScroll]="{x: '3500px'}"
               nzShowSizeChanger
               nzShowPagination>
       <thead>
       <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Address</th>
-        <th>操作</th>
+        <th nzWidth="80px" nzLeft>ID</th>
+        <th nzWidth="120px" nzLeft>name</th>
+        <th>active</th>
+        <th>appType</th>
+        <th>app_id</th>
+        <th>client_id</th>
+        <th>domain</th>
+        <th>edges: ClientOwner: null</th>
+        <th>frame_options</th>
+        <th>redirectUrl</th>
+        <th>response_type</th>
+        <th>scope</th>
+        <th>secret</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th nzWidth="270px" nzRight>操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{ data }}</td>
-        <td>{{ data }}</td>
-        <td>{{ data }}</td>
-        <td>
-          <div style="display: flex">
+        <td nzLeft>{{ data.id }}</td>
+        <td nzLeft>{{ data.name }}</td>
+        <td>{{ data.active }}</td>
+        <td>{{ data.appType }}</td>
+        <td>{{ data.app_id }}</td>
+        <td>{{ data.client_id }}</td>
+        <td>{{ data.domain }}</td>
+        <td>{{ data.edges }}</td>
+        <td>{{ data.frame_options }}</td>
+        <td>{{ data.redirectUrl }}</td>
+        <td>{{ data.response_type }}</td>
+        <td>{{ data.scope }}</td>
+        <td>{{ data.secret }}</td>
+        <td>{{ data.created_at | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{ data.updated_at | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td nzRight>
+          <div style="display: flex; justify-content: space-between">
             <button nz-button>更新</button>
             <button nz-button>更新密钥</button>
             <button nz-button>删除</button>
