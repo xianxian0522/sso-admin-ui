@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Login} from '../mode/login';
 
-const API = '/sso-admin/api/v1';
+const clientApi = '/sso-admin/api/v1/client';
+const ssoApi = '/sso-admin/api/v1/sso';
+const userApi = '/sso-admin/api/v1/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +14,39 @@ export class BaseRepository<MODEL extends {id?: number}> {
   constructor(protected httpClient: HttpClient) {
   }
 
-  add(url: string, model: MODEL): Observable<any> {
-    return this.httpClient.post(`${API}/${url}/client`, model);
+  add(model: MODEL): Observable<any> {
+    return this.httpClient.post(`${clientApi}/client`, model);
   }
-  update(url: string, model: MODEL): Observable<any> {
-    return this.httpClient.post(`${API}/${url}/updateClient`, model);
+  update(model: MODEL): Observable<any> {
+    return this.httpClient.post(`${clientApi}/updateClient`, model);
   }
-  updateByIds(url: string, model: MODEL): Observable<any> {
-    return this.httpClient.post(`${API}/${url}/updateIds`, model);
+  updateByIds(model: MODEL): Observable<any> {
+    return this.httpClient.post(`${clientApi}/updateIds`, model);
   }
-  delete(url: string, id: number): Observable<any> {
-    return this.httpClient.post(`${API}/${url}/delete`, {id});
+  delete(id: number): Observable<any> {
+    return this.httpClient.post(`${clientApi}/delete`, {id});
   }
-  queryPage(url: string, page: number, size: number, q?: {[key: string]: any}): Observable<any>{
+  queryPage(page: number, size: number, q?: {[key: string]: any}): Observable<any>{
     const params = this.genParams(q);
-    const requestUrl = `${API}/${url}/clientListPage?size=${size}&page=${page}&${params.toString()}`;
+    const requestUrl = `${clientApi}/clientListPage?size=${size}&page=${page}&${params.toString()}`;
     return this.httpClient.get(requestUrl);
+  }
+
+  login(): Observable<Login> {
+    return this.httpClient.get<Login>(`${ssoApi}/login`);
+  }
+  token(): Observable<any>{
+    return this.httpClient.get(`${ssoApi}/getToken`);
+  }
+
+  uereInfo(): Observable<any>{
+    return this.httpClient.get(`${userApi}/userinfo`);
+  }
+  updateUserInfo(model: MODEL): Observable<any>{
+    return this.httpClient.post(`${userApi}/updateUserInfo`, model);
+  }
+  updatePassword(model: MODEL): Observable<any>{
+    return this.httpClient.post(`${userApi}/modifyPassword`, model);
   }
 
   protected genParams(q?: {[key: string]: any}): URLSearchParams {
