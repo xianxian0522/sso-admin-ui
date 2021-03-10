@@ -63,13 +63,19 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     });
   }
   updatePassword(): void {
-
+    this.modalService.create({
+      nzContent: UserEditComponent,
+      nzFooter: null,
+      nzComponentParams: {mode: 'password', data: this.userInfo},
+    }).afterClose.subscribe(_ => {
+      console.log(_, 'password');
+    });
   }
   updateUserInfo(): void {
     this.modalService.create({
       nzContent: UserEditComponent,
       nzFooter: null,
-      nzComponentParams: {mode: 'info', data: this.userInfo}
+      nzComponentParams: {mode: 'info', data: this.userInfo},
     }).afterClose.subscribe(_ => {
       console.log(_, '__');
     });
