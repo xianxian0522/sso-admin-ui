@@ -26,21 +26,21 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   pageSize = 10;
   pageIndex = 1;
   isLoading = false;
-  @ViewChild(NzTableComponent) table: NzTableComponent | undefined;
+  @ViewChild(NzTableComponent) table!: NzTableComponent;
   @Output() refresh = new EventEmitter<string>();
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    merge(this.table?.nzPageSizeChange as EventEmitter<number>,
+    merge(this.table.nzPageSizeChange,
       this.table?.nzPageIndexChange as EventEmitter<number>,
       this.refresh
     ).pipe(
       debounceTime(200),
       switchMap(_ => {
         this.isLoading = true;
-        return this.baseRepository.queryPage(this.table?.nzPageIndex as number, this.table?.nzPageSize as number);
+        return this.baseRepository.queryPage(this.table.nzPageIndex, this.table?.nzPageSize);
       }),
       map(data => {
         this.isLoading = false;
