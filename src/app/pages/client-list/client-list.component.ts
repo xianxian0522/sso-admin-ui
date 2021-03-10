@@ -30,22 +30,6 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   @Output() refresh = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      // console.log(params, 'params', params.state);
-      this.baseRepository.token(params.state, params.code).subscribe(res => {
-        localStorage.setItem('token', res.data as string);
-        this.refresh.emit();
-        this.getUserInfo();
-        // if (res.code === 200) {
-        //   console.log('页面刷新没有token？', res);
-        //   localStorage.setItem('token', res.data as string);
-        //   this.refresh.emit();
-        //   this.getUserInfo();
-        // } else {
-        //   this.messageService.warning(res.msg as string);
-        // }
-      });
-    });
   }
 
   ngAfterViewInit(): void {
@@ -67,6 +51,9 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       this.listOfData = res;
       // console.log(res, 'list');
     });
+
+    this.refresh.emit();
+    this.getUserInfo();
   }
 
   getUserInfo(): void {

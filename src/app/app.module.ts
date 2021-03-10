@@ -22,6 +22,7 @@ import {NzAvatarModule} from 'ng-zorro-antd/avatar';
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzTableModule} from 'ng-zorro-antd/table';
+import { MiddleComponent } from './pages/middle/middle.component';
 
 registerLocaleData(zh);
 
@@ -30,7 +31,8 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     ClientListComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MiddleComponent
   ],
   imports: [
     BrowserModule,

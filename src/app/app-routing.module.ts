@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
 import {ClientListComponent} from './pages/client-list/client-list.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {MiddleComponent} from './pages/middle/middle.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'client', component: ClientListComponent},
+  {path: 'middle', component: MiddleComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
