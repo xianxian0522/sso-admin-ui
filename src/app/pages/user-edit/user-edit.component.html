@@ -1,1 +1,44 @@
-<p>user-edit works!</p>
+<div>
+  <form nz-form [formGroup]="editForm">
+    <nz-form-item *ngIf="mode === 'password'">
+      <nz-form-label [nzSpan]="6" nzNoColon>用户名</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input nzSize="small" formControlName="username" placeholder="用户名" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzNoColon>电话</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input nzSize="small" formControlName="mobile" placeholder="电话" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item *ngIf="mode === 'info'">
+      <nz-form-label [nzSpan]="6" nzNoColon>真实姓名</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input nzSize="small" formControlName="realName" placeholder="真实姓名" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item *ngIf="mode === 'info'">
+      <nz-form-label [nzSpan]="6" nzNoColon>E-mail</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="email" formControlName="mail" placeholder="email" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item *ngIf="mode === 'password'">
+      <nz-form-label [nzSpan]="6" nzNoColon>新密码</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="password" formControlName="password" placeholder="password" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item *ngIf="mode === 'password'">
+      <nz-form-label [nzSpan]="6" nzNoColon>原密码</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="password" formControlName="lastPassword" placeholder="原密码" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+  </form>
+  <div class="btn">
+    <button nz-button nzType="default" (click)="onCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="onSubmit()" [disabled]="!editForm.valid && mode === 'password'">确定</button>
+  </div>
+</div>

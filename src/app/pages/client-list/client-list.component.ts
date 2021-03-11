@@ -6,6 +6,7 @@ import {debounceTime, map, switchMap} from 'rxjs/operators';
 import {ClientList} from '../../share/mode/client';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {UserEditComponent} from '../user-edit/user-edit.component';
+import {ClientEditComponent} from '../client-edit/client-edit.component';
 
 @Component({
   selector: 'app-client-list',
@@ -19,7 +20,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     private modalService: NzModalService,
   ) { }
 
-  username = '';
+  username = '用户名';
   userInfo: any;
   listOfData: ClientList[] = [];
   total = 1;
@@ -44,26 +45,31 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       }),
       map(data => {
         this.isLoading = false;
-        this.total = data.data.Total;
-        return data.data.Content;
+        if (data.code === 200) {
+          this.total = data.data.Total;
+          return data.data.Content;
+        }
       })
     ).subscribe(res => {
       this.listOfData = res;
       // console.log(res, 'list');
     });
 
-    this.refresh.emit();
-    this.getUserInfo();
+    // this.refresh.emit();
+    // this.getUserInfo();
   }
 
   getUserInfo(): void {
     this.baseRepository.userInfo().subscribe(user => {
-      this.username = user.data.username as string;
-      this.userInfo = user.data;
+      if (user.code === 200) {
+        this.username = user.data.username as string;
+        this.userInfo = user.data;
+      }
     });
   }
   updatePassword(): void {
     this.modalService.create({
+      nzTitle: '修改密码',
       nzContent: UserEditComponent,
       nzFooter: null,
       nzComponentParams: {mode: 'password', data: this.userInfo},
@@ -73,16 +79,36 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   }
   updateUserInfo(): void {
     this.modalService.create({
+      nzTitle: '修改信息',
       nzContent: UserEditComponent,
       nzFooter: null,
       nzComponentParams: {mode: 'info', data: this.userInfo},
     }).afterClose.subscribe(_ => {
-      console.log(_, '__');
+      if (_.code === 200) {
+        this.refresh.emit();
+      }
     });
   }
   logout(): void {
     localStorage.removeItem('token');
     this.refresh.emit();
+  }
+
+  updateByIds(id: number): void {
+
+  }
+  update(ele: { [key: string]: any }): void {
+    this.modalService.create({
+      nzTitle: '修改',
+      nzComponentParams: {data: ele},
+      nzContent: ClientEditComponent,
+      nzFooter: null,
+    }).afterClose.subscribe(_ => {
+      console.log(_, 'client update');
+    });
+  }
+  delete(id: number): void {
+
   }
 
 }

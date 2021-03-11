@@ -1,1 +1,45 @@
-<p>client-edit works!</p>
+<div>
+  <form nz-form [formGroup]="editForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzNoColon>ID</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input nzSize="small" formControlName="id" placeholder="id" readonly />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzNoColon>active</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <label nz-checkbox formControlName="active"></label>
+<!--        <input nz-input nzSize="small" formControlName="active" placeholder="active" />-->
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item >
+      <nz-form-label [nzSpan]="6" nzNoColon>domain</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input nzSize="small" formControlName="domain" placeholder="domain" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item >
+      <nz-form-label [nzSpan]="6" nzNoColon>name</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="name" placeholder="name" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item >
+      <nz-form-label [nzSpan]="6" nzNoColon>redirectUrl</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="redirectUrl" placeholder="redirectUrl" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item >
+      <nz-form-label [nzSpan]="6" nzNoColon>scope</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="scope" placeholder="scope" nzSize="small" />
+      </nz-form-control>
+    </nz-form-item >
+  </form>
+  <div class="btn">
+    <button nz-button nzType="default" (click)="onCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="onSubmit()" [disabled]="!editForm.valid">确定</button>
+  </div>
+</div>

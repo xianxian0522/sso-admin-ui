@@ -26,6 +26,9 @@ import { MiddleComponent } from './pages/middle/middle.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { ClientEditComponent } from './pages/client-edit/client-edit.component';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {NzFormModule} from 'ng-zorro-antd/form';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 
 registerLocaleData(zh);
 
@@ -55,6 +58,9 @@ registerLocaleData(zh);
     NzIconModule,
     NzTableModule,
     NzModalModule,
+    NzFormModule,
+    NzInputModule,
+    NzCheckboxModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },
