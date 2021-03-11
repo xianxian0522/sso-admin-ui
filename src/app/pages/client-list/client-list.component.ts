@@ -7,6 +7,7 @@ import {ClientList} from '../../share/mode/client';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 import {ClientEditComponent} from '../client-edit/client-edit.component';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-client-list',
@@ -18,6 +19,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   constructor(
     private baseRepository: BaseRepository<any>,
     private modalService: NzModalService,
+    private messageService: NzMessageService,
   ) { }
 
   username = '用户名';
@@ -84,7 +86,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       nzFooter: null,
       nzComponentParams: {mode: 'info', data: this.userInfo},
     }).afterClose.subscribe(_ => {
-      if (_.code === 200) {
+      if (_ && _.code === 200) {
         this.refresh.emit();
       }
     });
@@ -95,7 +97,13 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   }
 
   updateByIds(id: number): void {
-
+    this.baseRepository.updateByIds(id).subscribe(_ => {
+      console.log(_, 'update id');
+      this.messageService.success('更新密钥成功');
+    });
+  }
+  cancel(): void {
+    this.messageService.info('取消操作');
   }
   update(ele: { [key: string]: any }): void {
     this.modalService.create({
@@ -108,7 +116,10 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     });
   }
   delete(id: number): void {
-
+    this.baseRepository.delete(id).subscribe(_ => {
+      console.log(_, 'delete');
+      this.messageService.success('删除成功');
+    });
   }
 
 }

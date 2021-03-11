@@ -21,8 +21,8 @@ export class BaseRepository<MODEL extends {id?: number}> {
   update(model: MODEL): Observable<any> {
     return this.httpClient.post(`${clientApi}/updateClient`, model);
   }
-  updateByIds(model: MODEL): Observable<any> {
-    return this.httpClient.post(`${clientApi}/updateIds`, model);
+  updateByIds(id: number): Observable<any> {
+    return this.httpClient.post(`${clientApi}/updateIds`, {id});
   }
   delete(id: number): Observable<any> {
     return this.httpClient.post(`${clientApi}/delete`, {id});

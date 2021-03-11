@@ -25,6 +25,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.messageService.info(res.msg as string);
       }
-    }, err => this.messageService.error(err));
+    }, err => this.messageService.error(err.error.message));
   }
 }

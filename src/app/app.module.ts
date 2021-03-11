@@ -29,6 +29,7 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
+import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 
 registerLocaleData(zh);
 
@@ -61,6 +62,7 @@ registerLocaleData(zh);
     NzFormModule,
     NzInputModule,
     NzCheckboxModule,
+    NzPopconfirmModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

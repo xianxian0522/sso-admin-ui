@@ -65,8 +65,8 @@
         <td nzRight>
           <div style="display: flex; justify-content: space-between">
             <button nz-button (click)="update(data)">更新</button>
-            <button nz-button (click)="updateByIds(data.id)">更新密钥</button>
-            <button nz-button (click)="delete(data.id)">删除</button>
+            <button nz-button nz-popconfirm nzPopconfirmTitle="确定要更新密钥吗" (nzOnConfirm)="updateByIds(data.id)" (nzOnCancel)="cancel()">更新密钥</button>
+            <button nz-button nz-popconfirm nzPopconfirmTitle="确定要删除吗" (nzOnConfirm)="delete(data.id)" (nzOnCancel)="cancel()">删除</button>
           </div>
         </td>
       </tr>
