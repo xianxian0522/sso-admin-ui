@@ -1,11 +1,11 @@
 <div>
   <form nz-form [formGroup]="editForm">
-    <nz-form-item *ngIf="mode === 'password'">
-      <nz-form-label [nzSpan]="6" nzNoColon>用户名</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input nzSize="small" formControlName="username" placeholder="用户名" />
-      </nz-form-control>
-    </nz-form-item >
+<!--    <nz-form-item *ngIf="mode === 'password'">-->
+<!--      <nz-form-label [nzSpan]="6" nzNoColon>用户名</nz-form-label>-->
+<!--      <nz-form-control [nzSpan]="14">-->
+<!--        <input nz-input nzSize="small" formControlName="username" placeholder="用户名" />-->
+<!--      </nz-form-control>-->
+<!--    </nz-form-item >-->
     <nz-form-item>
       <nz-form-label [nzSpan]="6" nzNoColon>电话</nz-form-label>
       <nz-form-control [nzSpan]="14">
@@ -21,7 +21,7 @@
     <nz-form-item *ngIf="mode === 'info'">
       <nz-form-label [nzSpan]="6" nzNoColon>E-mail</nz-form-label>
       <nz-form-control [nzSpan]="14">
-        <input nz-input type="email" formControlName="mail" placeholder="email" nzSize="small" />
+        <input nz-input type="email" formControlName="email" placeholder="email" nzSize="small" />
       </nz-form-control>
     </nz-form-item >
     <nz-form-item *ngIf="mode === 'password'">

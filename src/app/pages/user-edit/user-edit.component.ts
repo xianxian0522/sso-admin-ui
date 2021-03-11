@@ -21,17 +21,16 @@ export class UserEditComponent implements OnInit {
   @Input() data: any;
   @Input() mode!: string;
   editForm = this.fb.group({
-    username: ['', Validators.required],
+    // username: ['', Validators.required],
     lastPassword: ['', Validators.required],
     password: ['', Validators.required],
     mobile: [], // 修改密码和信息都有
-    mail: [],
+    email: [],
     realName: [],
   });
 
   ngOnInit(): void {
-    console.log(this.data, this.mode, 'mode data');
-    // this.editForm.patchValue({...this.data});
+    this.editForm.patchValue({...this.data});
   }
 
   onCancel(): void {
@@ -41,9 +40,12 @@ export class UserEditComponent implements OnInit {
     const value = {...this.editForm.value};
     (this.mode === 'info' ? this.baseRepository.updateUserInfo(value) :
       this.baseRepository.updatePassword(value)).subscribe(res => {
-      // console.log(res, 'res');
-      this.messageService.success('修改成功');
-      this.modalRef.close(res);
+      if (res.code === 200) {
+        this.messageService.success('修改成功');
+        this.modalRef.close(res);
+      } else {
+        this.messageService.warning(res.msg);
+      }
     }, err => {
         this.messageService.error(err.error.message);
         this.modalRef.close(err);

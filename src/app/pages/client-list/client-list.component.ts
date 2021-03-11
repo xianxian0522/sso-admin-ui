@@ -57,15 +57,17 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       // console.log(res, 'list');
     });
 
-    // this.refresh.emit();
-    // this.getUserInfo();
+    this.refresh.emit();
+    this.getUserInfo();
   }
 
   getUserInfo(): void {
     this.baseRepository.userInfo().subscribe(user => {
       if (user.code === 200) {
-        this.username = user.data.username as string;
+        this.username = user.data.realName as string;
         this.userInfo = user.data;
+      } else {
+        this.messageService.warning(user.msg as string);
       }
     });
   }
@@ -76,7 +78,9 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       nzFooter: null,
       nzComponentParams: {mode: 'password', data: this.userInfo},
     }).afterClose.subscribe(_ => {
-      console.log(_, 'password');
+      if (_ && _.code === 200) {
+        this.getUserInfo();
+      }
     });
   }
   updateUserInfo(): void {
@@ -87,7 +91,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       nzComponentParams: {mode: 'info', data: this.userInfo},
     }).afterClose.subscribe(_ => {
       if (_ && _.code === 200) {
-        this.refresh.emit();
+        this.getUserInfo();
       }
     });
   }
@@ -98,8 +102,11 @@ export class ClientListComponent implements OnInit, AfterViewInit {
 
   updateByIds(id: number): void {
     this.baseRepository.updateByIds(id).subscribe(_ => {
-      console.log(_, 'update id');
-      this.messageService.success('更新密钥成功');
+      if (_.code === 200) {
+        this.messageService.success('更新密钥成功');
+      } else {
+        this.messageService.success(_.msg);
+      }
     });
   }
   cancel(): void {
@@ -112,13 +119,18 @@ export class ClientListComponent implements OnInit, AfterViewInit {
       nzContent: ClientEditComponent,
       nzFooter: null,
     }).afterClose.subscribe(_ => {
-      console.log(_, 'client update');
+      if (_ && _.code === 200) {
+        this.refresh.emit();
+      }
     });
   }
   delete(id: number): void {
     this.baseRepository.delete(id).subscribe(_ => {
-      console.log(_, 'delete');
-      this.messageService.success('删除成功');
+      if (_.code === 200) {
+        this.messageService.success('删除成功');
+      } else {
+        this.messageService.success(_.msg);
+      }
     });
   }
 

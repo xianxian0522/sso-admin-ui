@@ -29,8 +29,8 @@ export class ClientEditComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log(this.data, 'data');
-    // this.editForm.patchValue({...this.data});
+    // console.log(this.data, 'data');
+    this.editForm.patchValue({...this.data});
   }
 
   onCancel(): void {
@@ -39,14 +39,15 @@ export class ClientEditComponent implements OnInit {
   onSubmit(): void {
     const value = {...this.editForm.value};
     this.baseRepository.update(value).subscribe(res => {
-      console.log(res, 'update res');
       if (res.code === 200) {
         this.messageService.success('更新成功');
+        this.modalRef.close(res);
       } else {
         this.messageService.info(res.msg);
       }
     }, err => {
       this.messageService.error(err.error.message);
+      this.modalRef.close(err);
     });
   }
 }
