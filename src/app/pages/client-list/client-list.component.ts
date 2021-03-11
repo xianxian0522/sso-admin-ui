@@ -104,6 +104,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     this.baseRepository.updateByIds(id).subscribe(_ => {
       if (_.code === 200) {
         this.messageService.success('更新密钥成功');
+        this.refresh.emit();
       } else {
         this.messageService.success(_.msg);
       }
@@ -128,6 +129,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
     this.baseRepository.delete(id).subscribe(_ => {
       if (_.code === 200) {
         this.messageService.success('删除成功');
+        this.refresh.emit();
       } else {
         this.messageService.success(_.msg);
       }
